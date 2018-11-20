@@ -28,7 +28,7 @@ public class Grafo {
 	
 	public SalidaDijkstraPrincesa resolver() {
 		List<Integer> camino = new LinkedList<>();
-		
+		int[] vectorDeCostos = new int[this.cantDeClaros];
 		
 		return new SalidaDijkstraPrincesa("aa", camino);
 	}

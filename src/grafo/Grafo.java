@@ -32,6 +32,8 @@ public class Grafo {
 		PriorityQueue<Arista> colaCostoArista = new PriorityQueue<>();
 		int[] vectorDeDistancias = new int[this.cantDeClaros];
 		int[] vecDePredecesores = new int[this.cantDeClaros];
+		boolean[] vecNodosUtilizados = new boolean[this.cantDeClaros];
+		
 		
 		int claroActual = this.claroPrincesa, claroAdyacenteAlActual, distanciaDirecta, distanciaPorIntermedio;
 		boolean esInterceptado = false;
@@ -43,23 +45,26 @@ public class Grafo {
 				vectorDeDistancias[a.getNodoDestino()] = a.getDistancia();
 		}
 		
+		vecNodosUtilizados[claroActual-1] = true;
+		
 		vectorDeDistancias[claroActual-1] = 0;
 
 		while (!colaCostoArista.isEmpty()) {
 			claroActual = colaCostoArista.poll().getNodoDestino() + 1;
-
-			for (Arista a : this.matrizAdyacencia.getAdyacentes(claroActual)) {
-				claroAdyacenteAlActual = a.getNodoDestino() + 1;
-
-				distanciaDirecta = vectorDeDistancias[claroAdyacenteAlActual - 1];
-				distanciaPorIntermedio = vectorDeDistancias[claroActual - 1]
-						+ this.matrizAdyacencia.getDistancia(claroActual, claroAdyacenteAlActual);
-
-				if (distanciaPorIntermedio < distanciaDirecta) {
-					vecDePredecesores[claroAdyacenteAlActual-1] = claroActual-1;
-					vectorDeDistancias[claroAdyacenteAlActual - 1] = distanciaPorIntermedio;
+			if(vecNodosUtilizados[claroActual-1] == false) {
+				vecNodosUtilizados[claroActual-1] = true;
+				for (Arista a : this.matrizAdyacencia.getAdyacentes(claroActual)) {
+					claroAdyacenteAlActual = a.getNodoDestino() + 1;
+					distanciaDirecta = vectorDeDistancias[claroAdyacenteAlActual - 1];
+					distanciaPorIntermedio = vectorDeDistancias[claroActual - 1]
+							+ this.matrizAdyacencia.getDistancia(claroActual, claroAdyacenteAlActual);
 					
-					colaCostoArista.add(new Arista(claroAdyacenteAlActual-1, distanciaPorIntermedio));
+					if (distanciaPorIntermedio < distanciaDirecta) {
+						vecDePredecesores[claroAdyacenteAlActual-1] = claroActual-1;
+						vectorDeDistancias[claroAdyacenteAlActual - 1] = distanciaPorIntermedio;
+						
+						colaCostoArista.add(new Arista(claroAdyacenteAlActual-1, distanciaPorIntermedio));
+					}
 				}
 			}
 		}

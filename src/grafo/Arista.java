@@ -28,4 +28,33 @@ public class Arista implements Comparable<Arista> {
 		return this.distancia - otra.distancia;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + distancia;
+		result = prime * result + nodoDestino;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Arista other = (Arista) obj;
+		if (distancia != other.distancia)
+			return false;
+		if (nodoDestino != other.nodoDestino)
+			return false;
+		return true;
+	}
+
+	public void setDistancia(int distancia) {
+		this.distancia = distancia;
+	}
+
 }

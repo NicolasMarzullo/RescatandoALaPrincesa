@@ -13,10 +13,23 @@ public class PrincesaTests {
 	public void testCasoEnunciado() {
 		try {
 			Grafo grafo = Archivo.cargarArchivo("tests/lotes/in/01_CasoEnunciado.in");
-			grafo.resolver();
+			Archivo.imprimirSalida("tests/lotes/out/01_CasoEnunciado.out", grafo.resolver());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		
 	}
+	
+	@Test
+	public void testPrincipePuedeRescatarla() {
+		try {
+			Grafo grafo = Archivo.cargarArchivo("tests/lotes/in/02_CasoPrincipePuedeRescatarla.in");
+			Archivo.imprimirSalida("tests/lotes/out/02_CasoPrincipePuedeRescatarla.out", grafo.resolver());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 }

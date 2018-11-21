@@ -64,9 +64,13 @@ public class Grafo {
 			}
 		}
 		
-		//me fijo si las distancias de la princesa al principe es menor que
-		//la distancia de la princesa a los dragones
 		
+		if(vectorDeDistancias[claroPrincipe-1] == Grafo.INFINITO) {
+			return new SalidaDijkstraPrincesa("NO HAY CAMINO", null);
+		}
+		
+		//me fijo si las distancias de la princesa al principe es menor que
+				//la distancia de la princesa a los dragones
 		for(Integer claroDragon: this.clarosDragones) {
 			if(vectorDeDistancias[claroDragon-1] < vectorDeDistancias[claroPrincipe-1]) {
 				esInterceptado = true;
@@ -76,10 +80,6 @@ public class Grafo {
 		
 		if(esInterceptado){
 			return new SalidaDijkstraPrincesa("INTERCEPTADO", null);
-		}
-		
-		if(vectorDeDistancias[claroPrincipe-1] == Grafo.INFINITO) {
-			return new SalidaDijkstraPrincesa("NO HAY CAMINO", null);
 		}
 		
 		//Armo el camino (si no fue interceptado y ese camino existe)

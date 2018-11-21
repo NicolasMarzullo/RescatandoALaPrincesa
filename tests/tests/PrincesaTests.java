@@ -32,4 +32,16 @@ public class PrincesaTests {
 	}
 	
 	
+	@Test
+	public void testNoHayCamino() {
+		try {
+			Grafo grafo = Archivo.cargarArchivo("tests/lotes/in/03_CasoNoHayCamino.in");
+			Archivo.imprimirSalida("tests/lotes/out/03_CasoNoHayCamino.out", grafo.resolver());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 }

@@ -58,8 +58,8 @@ public class Grafo {
 				if (distanciaPorIntermedio < distanciaDirecta) {
 					vecDePredecesores[claroAdyacenteAlActual-1] = claroActual-1;
 					vectorDeDistancias[claroAdyacenteAlActual - 1] = distanciaPorIntermedio;
-					colaCostoArista.remove(new Arista(claroAdyacenteAlActual, distanciaDirecta));
-					colaCostoArista.add(new Arista(claroAdyacenteAlActual, distanciaPorIntermedio));
+					
+					colaCostoArista.add(new Arista(claroAdyacenteAlActual-1, distanciaPorIntermedio));
 				}
 			}
 		}
@@ -86,9 +86,9 @@ public class Grafo {
 		List<Integer> caminoSeguro = new LinkedList<>();
 		
 		caminoSeguro.add(claroPrincipe);
-		int k = claroPrincipe;
+		int k = claroPrincipe-1;
 		while(vecDePredecesores[k] !=0) {
-			k = vecDePredecesores[k-1];
+			k = vecDePredecesores[k];
 			caminoSeguro.add(k+1);
 		}
 		
